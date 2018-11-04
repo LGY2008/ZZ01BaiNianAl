@@ -69,7 +69,7 @@ class TestLogin():
         if expect_result:
             try:
                 # 输入用户名
-                self.login.page_input_username(username)
+                self.login.page_input_username( username )
                 # 输入密码
                 self.login.page_input_pwd(password)
                 # 点击登录
