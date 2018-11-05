@@ -12,7 +12,7 @@ class ReadYAML():
 
     # 以下方法 作为右键运行调试所用
     def read_yaml01(self):
-        with open("../Data/login_data.yaml","r",encoding="utf-8")as f:
+        with open("../Data/address_data.yaml","r",encoding="utf-8")as f:
             # yaml 的load方法进行读取
             return yaml.load(f)
 """
@@ -25,6 +25,12 @@ if __name__ == '__main__':
     # 自定义空列表
     arrs=[]
     # 获取出的结果为列表，列表内单个元素值为字典 datas.values()
-    for data in ReadYAML("read_yaml.py").read_yaml01().values():
-        arrs.append((data.get("username"),data.get("password"),data.get("expect_result"),data.get("expect_toast")))
+    datas=ReadYAML("address_data.yaml").read_yaml01()
+    # for data in datas.get("add_address").values():
+    #     # arrs.append((data.get("name"),data.get("phone"),data.get("sheng"),data.get("shi"),data.get("qu"),data.get("addressinfo"),data.get("postcode")))
+    #     print(data)
+    # print(arrs)
+    # [(李四，18611110000，河南。。。)]
+    desc=datas.get("add_address")
+    arrs.append((desc.get("name"),desc.get("phone"),desc.get("sheng"),desc.get("shi"),desc.get("qu"),desc.get("addressinfo"),desc.get("postcode")))
     print(arrs)

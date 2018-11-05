@@ -6,6 +6,7 @@ def get_driver():
     desired_caps['platformName'] = 'Android'
     desired_caps['platformVersion'] = '5.1'
     desired_caps['deviceName'] = '192.168.56.101:5555'
+    # desired_caps['deviceName'] = '872QAET9W9QCL'
     # 指定appium框架版本 获取toast消息必须 指定以下参数
     desired_caps['automationName'] = 'Uiautomator2'
     # 设置中文

@@ -19,6 +19,14 @@ class Base():
             3. 最后要通过return进行返回元素
         """
         return WebDriverWait(self.driver,timeout,poll_frequency=poll).until(lambda x:x.find_element(*loc))
+    # 查找一组元素封装
+    def base_find_elements(self,loc,timeout=30,poll=0.5):
+        """
+            1. 封装查找元素的时候，记得使用 显示等待
+            2. 使用driver.find_element(By.XPAHT,"....")
+            3. 最后要通过return进行返回元素
+        """
+        return WebDriverWait(self.driver,timeout,poll_frequency=poll).until(lambda x:x.find_elements(*loc))
     # 点击方法 封装
     def base_click(self,loc):
         self.base_find_element(loc).click()
@@ -55,4 +63,27 @@ class Base():
         """
         self.driver.drag_and_drop(el1,el2)
 
+    # 封装传入文本，根据文本查找元素，然后在进行点击操作
+    def base_xpath_text_click(self,text):
+        # 组装 元祖
+        loc=By.XPATH,"//*[contains(@text,'"+text+"')]"
+        # 查找元素 并点击
+        self.base_find_element(loc).click()
 
+    # 封一个返回所有列表文本的方法
+    def base_get_list_text(self,loc):
+        return [i.text for i in self.base_find_elements(loc)]
+
+    # 根据文本，返回包含此文本的所有元素
+    def base_input_text_get_elements(self,text):
+        loc = By.XPATH, "//*[contains(@text,'" + text + "')]"
+        return self.base_find_elements(loc)
+
+    # 传入列表 把列表内的个元素 进行点击操作
+    def base_list_click(self,elements,num=0):
+        # 获取当前元素的 文本
+        text=elements[num].text
+        # 对当前元素进行删除
+        elements[num].click()
+        # 把获取的文本返回  断言使用
+        return text
